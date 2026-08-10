@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AM2 Protege — Gestão de Riscos Psicossociais e Canal Seguro</title>
+  <meta name="description" content="Canal seguro, gestão de riscos psicossociais, planos de ação e evidências para apoiar a NR-1." />
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --surface:#ffffff;
+      --surface-2:#eef3f8;
+      --text:#0f172a;
+      --muted:#64748b;
+      --primary:#0f3d56;
+      --primary-2:#155e75;
+      --accent:#16a34a;
+      --accent-soft:#dcfce7;
+      --warning:#f59e0b;
+      --danger:#dc2626;
+      --border:#dbe3ec;
+      --shadow:0 18px 45px rgba(15,23,42,.10);
+      --radius:22px;
+      --radius-sm:14px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:linear-gradient(180deg,#f8fbfd 0%,#f5f7fb 100%);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px,92vw);margin:0 auto}
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:blur(16px);
+      background:rgba(248,251,253,.88);
+      border-bottom:1px solid rgba(219,227,236,.7);
+    }
+    .nav-inner{
+      height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px;
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:-.02em}
+    .brand-mark{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;color:white;font-weight:900;
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      box-shadow:0 8px 22px rgba(15,61,86,.22)
+    }
+    .nav-links{display:flex;gap:24px;color:#334155;font-size:14px}
+    .nav-actions{display:flex;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:12px;padding:12px 18px;font-weight:700;font-size:14px;
+      border:1px solid transparent;transition:.2s ease;cursor:pointer
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 22px rgba(15,61,86,.22)}
+    .btn-secondary{background:#fff;border-color:var(--border);color:var(--primary)}
+    .btn-ghost{background:transparent;border-color:var(--border)}
+    .hero{
+      padding:72px 0 48px;
+      overflow:hidden;
+    }
+    .hero-grid{
+      display:grid;grid-template-columns:1.03fr .97fr;gap:54px;align-items:center;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;padding:8px 12px;
+      background:#e8f4f7;color:#155e75;border:1px solid #cde7ec;border-radius:999px;
+      font-weight:800;font-size:12px;letter-spacing:.03em;text-transform:uppercase
+    }
+    h1{
+      font-size:clamp(42px,6vw,72px);line-height:1.02;margin:22px 0 20px;
+      letter-spacing:-.045em;max-width:760px
+    }
+    h1 span{color:var(--primary-2)}
+    .hero p{font-size:19px;color:#475569;max-width:700px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .trust-row{
+      display:flex;gap:18px;flex-wrap:wrap;margin-top:26px;color:#475569;font-size:13px
+    }
+    .trust-item{display:flex;align-items:center;gap:7px}
+    .dot{width:8px;height:8px;border-radius:999px;background:var(--accent)}
+    .dashboard{
+      background:#0b1724;border-radius:28px;padding:18px;box-shadow:0 30px 70px rgba(15,23,42,.25);
+      position:relative;
+    }
+    .dashboard:before{
+      content:"";position:absolute;inset:-90px -90px auto auto;width:220px;height:220px;border-radius:50%;
+      background:rgba(34,197,94,.08);filter:blur(12px)
+    }
+    .browser-bar{display:flex;gap:7px;margin:2px 0 14px}
+    .browser-bar i{width:9px;height:9px;border-radius:999px;background:#475569;display:block}
+    .dash-panel{background:#f7fafc;border-radius:18px;padding:18px}
+    .dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .dash-title{font-weight:800;color:#0f172a;font-size:14px}
+    .badge{font-size:11px;font-weight:800;padding:6px 9px;border-radius:999px;background:var(--accent-soft);color:#15803d}
+    .metric-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .metric{background:white;border:1px solid #e5ebf1;border-radius:14px;padding:13px}
+    .metric .label{font-size:11px;color:#64748b}
+    .metric strong{font-size:23px;display:block;margin-top:4px}
+    .mini{font-size:11px;color:#16a34a;font-weight:700}
+    .chart{
+      margin-top:12px;background:white;border:1px solid #e5ebf1;border-radius:14px;padding:14px;
+      display:grid;grid-template-columns:1.2fr .8fr;gap:15px
+    }
+    .bars{height:128px;display:flex;align-items:end;gap:9px;padding:6px 2px 0}
+    .bar{flex:1;border-radius:7px 7px 2px 2px;background:linear-gradient(180deg,#0f3d56,#2d7a94);min-width:10px}
+    .risk-list{display:flex;flex-direction:column;gap:9px}
+    .risk{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#334155}
+    .risk span:last-child{font-weight:800}
+    .section{padding:76px 0}
+    .section.alt{background:#eef3f8}
+    .section-head{max-width:760px;margin-bottom:34px}
+    .section-head h2{
+      font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-.035em;margin:12px 0
+    }
+    .section-head p{color:#64748b;font-size:17px}
+    .pill{display:inline-flex;padding:7px 10px;border-radius:999px;background:#e8f4f7;color:#155e75;font-size:12px;font-weight:800}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+      padding:24px;box-shadow:0 8px 24px rgba(15,23,42,.04)
+    }
+    .card h3{margin:12px 0 8px;font-size:20px}
+    .card p{color:#64748b;font-size:14px}
+    .icon{
+      width:42px;height:42px;border-radius:12px;background:#e8f4f7;color:var(--primary-2);
+      display:grid;place-items:center;font-size:20px;font-weight:900
+    }
+    .flow{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:stretch
+    }
+    .flow-step{
+      background:#fff;border:1px solid var(--border);border-radius:18px;padding:20px;position:relative
+    }
+    .flow-step b{display:block;margin-bottom:8px}
+    .flow-step span{color:#64748b;font-size:13px}
+    .flow-step .num{font-size:12px;color:#155e75;font-weight:800;margin-bottom:10px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+    .mock{
+      background:#fff;border:1px solid var(--border);border-radius:24px;padding:18px;box-shadow:var(--shadow)
+    }
+    .mock-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+    .mock-title{font-weight:800}
+    .status{
+      padding:5px 9px;border-radius:999px;font-size:11px;font-weight:800
+    }
+    .status.high{background:#fee2e2;color:#b91c1c}
+    .status.med{background:#fef3c7;color:#b45309}
+    .status.low{background:#dcfce7;color:#15803d}
+    .heat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .heat-card{border:1px solid var(--border);border-radius:14px;padding:14px}
+    .heat-card h4{margin:0 0 10px}
+    .line{display:flex;justify-content:space-between;font-size:12px;margin:8px 0}
+    .timeline{display:flex;flex-direction:column;gap:14px}
+    .timeline-item{display:grid;grid-template-columns:18px 1fr;gap:12px}
+    .timeline-item .bullet{width:12px;height:12px;margin-top:5px;border-radius:999px;background:var(--primary-2);box-shadow:0 0 0 5px #dceef2}
+    .timeline-item small{color:#64748b}
+    .case-box{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .case-cell{background:#f8fafc;border:1px solid #e5ebf1;border-radius:12px;padding:12px}
+    .case-cell span{display:block;font-size:11px;color:#64748b}
+    .case-cell strong{font-size:13px}
+    .privacy{
+      background:linear-gradient(135deg,#0f3d56,#0b2739);color:white;border-radius:28px;padding:34px
+    }
+    .privacy p{color:#d5e4eb}
+    .privacy-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+    .checks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .check{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:12px;border-radius:12px;font-size:13px}
+    .qr-wrap{
+      display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:center
+    }
+    .qr{
+      aspect-ratio:1;background:
+      linear-gradient(90deg,#0f172a 12px,transparent 12px) 0 0/24px 24px,
+      linear-gradient(#0f172a 12px,transparent 12px) 0 0/24px 24px,
+      linear-gradient(90deg,transparent 12px,#0f172a 12px) 0 0/24px 24px,
+      linear-gradient(transparent 12px,#0f172a 12px) 0 0/24px 24px;
+      border:14px solid white;box-shadow:0 0 0 1px var(--border);border-radius:16px
+    }
+    .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .plan{position:relative}
+    .plan.featured{border-color:#8fc7d2;box-shadow:0 18px 48px rgba(21,94,117,.14)}
+    .plan-tag{position:absolute;top:14px;right:14px;background:#e8f4f7;color:#155e75;font-size:11px;font-weight:800;padding:6px 8px;border-radius:999px}
+    .plan ul{padding-left:18px;color:#475569;font-size:14px;min-height:150px}
+    .cta{
+      background:linear-gradient(135deg,#0f3d56,#155e75);
+      color:white;border-radius:30px;padding:48px;text-align:center
+    }
+    .cta h2{font-size:clamp(34px,5vw,54px);margin:0 0 12px;letter-spacing:-.035em}
+    .cta p{color:#d7e7ec;max-width:720px;margin:0 auto 24px}
+    footer{padding:34px 0 50px;color:#64748b}
+    .footer-grid{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:24px}
+    .footer-grid h4{color:#0f172a;margin:0 0 10px}
+    .footer-grid a{display:block;margin:7px 0;font-size:13px}
+    .copyright{margin-top:28px;padding-top:18px;border-top:1px solid var(--border);font-size:12px}
+    @media(max-width:980px){
+      .hero-grid,.split,.privacy-grid{grid-template-columns:1fr}
+      .grid-3,.plans{grid-template-columns:1fr 1fr}
+      .flow{grid-template-columns:1fr 1fr}
+      .nav-links{display:none}
+      .metric-grid{grid-template-columns:1fr}
+      .qr-wrap{grid-template-columns:1fr}
+      .qr{max-width:230px}
+      .footer-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:680px){
+      .nav-actions .btn-secondary{display:none}
+      .grid-3,.plans,.flow,.heat-grid,.case-box,.checks,.footer-grid{grid-template-columns:1fr}
+      .hero{padding-top:44px}
+      h1{font-size:44px}
+      .chart{grid-template-columns:1fr}
+      .cta{padding:34px 22px}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio"><span class="brand-mark">A2</span><span>AM2 Protege</span></a>
+      <div class="nav-links">
+        <a href="#produto">Produto</a>
+        <a href="#riscos">Riscos Psicossociais</a>
+        <a href="#canal">Canal Seguro</a>
+        <a href="#seguranca">Segurança</a>
+        <a href="#planos">Planos</a>
+      </div>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="#planos">Ver planos</a>
+        <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">NR-1 • GRO/PGR • LGPD</span>
+        <h1>Proteja pessoas. <span>Gerencie riscos.</span> Organize evidências.</h1>
+        <p>Uma plataforma SaaS para canal seguro, riscos psicossociais, planos de ação e rastreabilidade — apoiando empresas na gestão preventiva do ambiente de trabalho.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+          <a class="btn btn-secondary" href="#produto">Conhecer a plataforma</a>
+        </div>
+        <div class="trust-row">
+          <div class="trust-item"><span class="dot"></span> Canal anônimo e identificado</div>
+          <div class="trust-item"><span class="dot"></span> Multiempresa e multiunidade</div>
+          <div class="trust-item"><span class="dot"></span> Privacy by Design</div>
+        </div>
+      </div>
+
+      <div class="dashboard">
+        <div class="browser-bar"><i></i><i></i><i></i></div>
+        <div class="dash-panel">
+          <div class="dash-top">
+            <div class="dash-title">Visão Executiva • Unidade Industrial</div>
+            <span class="badge">Ambiente monitorado</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><span class="label">Índice psicossocial</span><strong>62</strong><span class="mini">↓ 8 pts no trimestre</span></div>
+            <div class="metric"><span class="label">Casos abertos</span><strong>14</strong><span class="mini">3 novos</span></div>
+            <div class="metric"><span class="label">Planos em curso</span><strong>9</strong><span class="mini">78% no prazo</span></div>
+          </div>
+          <div class="chart">
+            <div>
+              <div class="label" style="font-size:11px;color:#64748b">Evolução do indicador de risco</div>
+              <div class="bars">
+                <div class="bar" style="height:88%"></div>
+                <div class="bar" style="height:82%"></div>
+                <div class="bar" style="height:78%"></div>
+                <div class="bar" style="height:71%"></div>
+                <div class="bar" style="height:64%"></div>
+                <div class="bar" style="height:58%"></div>
+              </div>
+            </div>
+            <div class="risk-list">
+              <div class="risk"><span>Produção</span><span style="color:#b91c1c">Alto</span></div>
+              <div class="risk"><span>Logística</span><span style="color:#b45309">Moderado</span></div>
+              <div class="risk"><span>Administrativo</span><span style="color:#15803d">Baixo</span></div>
+              <div class="risk"><span>Comercial</span><span style="color:#b45309">Moderado</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="produto">
+    <div class="container">
+      <div class="section-head">
+        <span class="pill">Uma plataforma, vários processos</span>
+        <h2>Da escuta do colaborador à evidência de que o risco foi tratado.</h2>
+        <p>O AM2 Protege conecta denúncia, percepção de riscos, investigação, plano de ação, reavaliação e histórico em um único fluxo.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="icon">🔒</div><h3>Canal Seguro</h3><p>Denúncias anônimas ou identificadas, protocolo confidencial, anexos e comunicação bidirecional.</p></div>
+        <div class="card"><div class="icon">◫</div><h3>Riscos Psicossociais</h3><p>Campanhas, questionários, indicadores agregados e leitura por unidade, setor e período.</p></div>
+        <div class="card"><div class="icon">✓</div><h3>Planos de Ação</h3><p>Responsáveis, prazos, evidências, reavaliação e acompanhamento da eficácia das medidas.</p></div>
+        <div class="card"><div class="icon">⌁</div><h3>Investigações</h3><p>Fluxos de análise, classificação, responsáveis, conflitos de interesse e histórico completo.</p></div>
+        <div class="card"><div class="icon">▤</div><h3>Dossiês e Evidências</h3><p>Relatórios estruturados para apoiar auditorias, gestão interna e processos relacionados ao GRO/PGR.</p></div>
+        <div class="card"><div class="icon">◎</div><h3>Indicadores</h3><p>Mapa de riscos, tendências, reincidências, participação e evolução ao longo do tempo.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="pill">Como funciona</span>
+        <h2>Um ciclo contínuo de prevenção e melhoria.</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">01</div><b>Escute</b><span>Receba relatos, denúncias e percepções dos colaboradores.</span></div>
+        <div class="flow-step"><div class="num">02</div><b>Entenda</b><span>Identifique fatores de risco e tendências por área ou unidade.</span></div>
+        <div class="flow-step"><div class="num">03</div><b>Aja</b><span>Crie planos com responsáveis, prazos e evidências.</span></div>
+        <div class="flow-step"><div class="num">04</div><b>Comprove</b><span>Reavalie, acompanhe a eficácia e preserve a rastreabilidade.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="riscos">
+    <div class="container split">
+      <div>
+        <span class="pill">Mapa Psicossocial</span>
+        <h2 style="font-size:42px;line-height:1.1;letter-spacing:-.035em;margin:16px 0">Transforme percepções em indicadores de gestão.</h2>
+        <p style="color:#64748b;font-size:17px">Visualize fatores como sobrecarga, pressão, autonomia, liderança, comunicação, conflitos e reconhecimento sem expor respostas individuais.</p>
+        <div class="hero-cta"><a class="btn btn-primary" href="#contato">Quero ver uma demonstração</a></div>
+      </div>
+      <div class="mock">
+        <div class="mock-header"><div class="mock-title">Mapa de Riscos • Agosto</div><span class="status med">Atenção</span></div>
+        <div class="heat-grid">
+          <div class="heat-card"><h4>Produção</h4><div class="line"><span>Sobrecarga</span><span class="status high">Alto</span></div><div class="line"><span>Pressão por metas</span><span class="status high">Alto</span></div><div class="line"><span>Liderança</span><span class="status med">Moderado</span></div></div>
+          <div class="heat-card"><h4>Logística</h4><div class="line"><span>Comunicação</span><span class="status med">Moderado</span></div><div class="line"><span>Conflitos</span><span class="status med">Moderado</span></div><div class="line"><span>Autonomia</span><span class="status low">Baixo</span></div></div>
+          <div class="heat-card"><h4>Administrativo</h4><div class="line"><span>Sobrecarga</span><span class="status low">Baixo</span></div><div class="line"><span>Reconhecimento</span><span class="status low">Baixo</span></div><div class="line"><span>Comunicação</span><span class="status low">Baixo</span></div></div>
+          <div class="heat-card"><h4>Comercial</h4><div class="line"><span>Metas</span><span class="status med">Moderado</span></div><div class="line"><span>Jornada</span><span class="status med">Moderado</span></div><div class="line"><span>Apoio</span><span class="status low">Baixo</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="canal">
+    <div class="container split">
+      <div class="mock">
+        <div class="mock-header"><div class="mock-title">Canal Seguro</div><span class="badge">Protocolo protegido</span></div>
+        <div class="case-box">
+          <div class="case-cell"><span>Protocolo</span><strong>NR1-26-X7PK-92QM</strong></div>
+          <div class="case-cell"><span>Status</span><strong>Em análise</strong></div>
+          <div class="case-cell"><span>Categoria</span><strong>Assédio moral</strong></div>
+          <div class="case-cell"><span>Prioridade</span><strong>Alta</strong></div>
+        </div>
+        <div style="margin-top:16px" class="timeline">
+          <div class="timeline-item"><div class="bullet"></div><div><strong>Relato recebido</strong><br><small>08/08/2026 • 08:41</small></div></div>
+          <div class="timeline-item"><div class="bullet"></div><div><strong>Triagem concluída</strong><br><small>08/08/2026 • 09:12</small></div></div>
+          <div class="timeline-item"><div class="bullet"></div><div><strong>Responsável atribuído</strong><br><small>08/08/2026 • 09:24</small></div></div>
+          <div class="timeline-item"><div class="bullet"></div><div><strong>Mensagem enviada ao denunciante</strong><br><small>08/08/2026 • 10:03</small></div></div>
+        </div>
+      </div>
+      <div>
+        <span class="pill">Canal Seguro</span>
+        <h2 style="font-size:42px;line-height:1.1;letter-spacing:-.035em;margin:16px 0">Confidencialidade que não termina no formulário.</h2>
+        <p style="color:#64748b;font-size:17px">Permita relatos anônimos ou identificados, anexos, acompanhamento por protocolo e comunicação bidirecional sem exigir que o colaborador revele sua identidade.</p>
+        <div class="grid-3" style="grid-template-columns:1fr 1fr;margin-top:20px">
+          <div class="card" style="padding:16px"><b>QR Code</b><p>Acesso simples pelo celular.</p></div>
+          <div class="card" style="padding:16px"><b>Chat anônimo</b><p>Continue a investigação com segurança.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div>
+        <span class="pill">Da identificação à eficácia</span>
+        <h2 style="font-size:42px;line-height:1.1;letter-spacing:-.035em;margin:16px 0">Cada risco tem uma história. O sistema registra todas.</h2>
+        <p style="color:#64748b;font-size:17px">Conecte o fator identificado às ações tomadas e demonstre a evolução ao longo do tempo.</p>
+      </div>
+      <div class="mock timeline">
+        <div class="timeline-item"><div class="bullet"></div><div><strong>Janeiro</strong><br><small>Pesquisa identificou risco alto de sobrecarga.</small></div></div>
+        <div class="timeline-item"><div class="bullet"></div><div><strong>Fevereiro</strong><br><small>Aumento de relatos relacionados à pressão por metas.</small></div></div>
+        <div class="timeline-item"><div class="bullet"></div><div><strong>Março</strong><br><small>Plano de ação criado com responsáveis e prazo.</small></div></div>
+        <div class="timeline-item"><div class="bullet"></div><div><strong>Abril</strong><br><small>Nova escala e reforço da equipe implementados.</small></div></div>
+        <div class="timeline-item"><div class="bullet"></div><div><strong>Junho</strong><br><small>Reavaliação: indicador caiu de 82 para 47.</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="pill">QR Code inteligente</span>
+        <h2>Um único ponto de acesso para toda a jornada.</h2>
+        <p>O colaborador escaneia o QR Code e escolhe o que precisa fazer — sem depender de login corporativo.</p>
+      </div>
+      <div class="card qr-wrap">
+        <div class="qr" aria-label="QR Code ilustrativo"></div>
+        <div>
+          <h3 style="font-size:30px;margin:0 0 10px">Sua voz importa.</h3>
+          <p style="font-size:16px">Acesse o Canal Seguro para:</p>
+          <div class="flow" style="grid-template-columns:repeat(3,1fr);margin-top:16px">
+            <div class="flow-step"><b>Fazer uma denúncia</b><span>Anônima ou identificada.</span></div>
+            <div class="flow-step"><b>Relatar uma situação</b><span>Mesmo quando você não sabe classificar o ocorrido.</span></div>
+            <div class="flow-step"><b>Avaliar o ambiente</b><span>Participe das campanhas psicossociais.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="seguranca">
+    <div class="container privacy">
+      <div class="privacy-grid">
+        <div>
+          <span class="eyebrow" style="background:rgba(255,255,255,.1);color:#dff4f7;border-color:rgba(255,255,255,.15)">Segurança e LGPD</span>
+          <h2 style="font-size:44px;line-height:1.08;letter-spacing:-.035em;margin:18px 0">Privacidade desde a arquitetura.</h2>
+          <p>Controle de acesso, segregação por empresa, trilha de auditoria, criptografia e políticas de retenção para reduzir riscos de acesso indevido e preservar a confidencialidade.</p>
+        </div>
+        <div class="checks">
+          <div class="check">✓ Controle por perfil</div>
+          <div class="check">✓ MFA para administradores</div>
+          <div class="check">✓ Logs de auditoria</div>
+          <div class="check">✓ Dados segregados por tenant</div>
+          <div class="check">✓ Backups protegidos</div>
+          <div class="check">✓ Retenção configurável</div>
+          <div class="check">✓ Limpeza de metadados</div>
+          <div class="check">✓ Privacy by Design</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="pill">IA responsável</span>
+        <h2>Inteligência para apoiar decisões, não para substituir pessoas.</h2>
+        <p>Use IA para organizar informações, identificar lacunas e destacar tendências — sem diagnosticar trabalhadores e sem decidir se uma denúncia é verdadeira.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="icon">AI</div><h3>Resumo inteligente</h3><p>Organize fatos, pessoas mencionadas, locais e informações relevantes para análise humana.</p></div>
+        <div class="card"><div class="icon">!</div><h3>Proteção de identidade</h3><p>Alerte o denunciante quando o próprio texto puder revelar indiretamente quem ele é.</p></div>
+        <div class="card"><div class="icon">↗</div><h3>Tendências</h3><p>Identifique aumento de ocorrências ou fatores recorrentes por unidade e período.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="planos">
+    <div class="container">
+      <div class="section-head">
+        <span class="pill">Planos</span>
+        <h2>Comece pelo canal. Evolua para uma gestão completa.</h2>
+        <p>Estrutura comercial ilustrativa para o MVP. Valores podem ser definidos depois da validação com os primeiros clientes.</p>
+      </div>
+      <div class="plans">
+        <div class="card plan">
+          <h3>Essencial</h3>
+          <p>Para empresas que precisam começar com um canal seguro.</p>
+          <ul>
+            <li>Canal anônimo e identificado</li>
+            <li>Protocolo e acompanhamento</li>
+            <li>Anexos e mensagens</li>
+            <li>Gestão de casos</li>
+            <li>QR Code</li>
+          </ul>
+          <a class="btn btn-secondary" href="#contato">Solicitar proposta</a>
+        </div>
+        <div class="card plan featured">
+          <span class="plan-tag">Mais completo</span>
+          <h3>Profissional</h3>
+          <p>Canal Seguro + Gestão de riscos psicossociais.</p>
+          <ul>
+            <li>Tudo do Essencial</li>
+            <li>Avaliações psicossociais</li>
+            <li>Mapa de riscos</li>
+            <li>Planos de ação</li>
+            <li>Dossiês e evidências</li>
+          </ul>
+          <a class="btn btn-primary" href="#contato">Solicitar proposta</a>
+        </div>
+        <div class="card plan">
+          <h3>Enterprise</h3>
+          <p>Para operações maiores e ambientes complexos.</p>
+          <ul>
+            <li>Tudo do Profissional</li>
+            <li>Múltiplas unidades</li>
+            <li>SSO e API</li>
+            <li>Perfis avançados</li>
+            <li>Integrações e SLA</li>
+          </ul>
+          <a class="btn btn-secondary" href="#contato">Falar com especialista</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contato">
+    <div class="container cta">
+      <h2>Transforme informação em prevenção.</h2>
+      <p>Crie um ambiente seguro para seus colaboradores e dê às equipes de RH, SST e Compliance ferramentas para identificar, acompanhar e tratar riscos relacionados ao trabalho.</p>
+      <div class="hero-cta" style="justify-content:center">
+        <a class="btn btn-secondary" style="background:white" href="mailto:contato@am2protege.com.br">Solicitar demonstração</a>
+        <a class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,.3)" href="#inicio">Voltar ao início</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand"><span class="brand-mark">A2</span><span>AM2 Protege</span></div>
+          <p style="font-size:13px;max-width:420px">Pessoas protegidas. Riscos gerenciados. Evidências organizadas.</p>
+        </div>
+        <div><h4>Produto</h4><a href="#canal">Canal Seguro</a><a href="#riscos">Riscos Psicossociais</a><a href="#produto">Planos de Ação</a></div>
+        <div><h4>Empresa</h4><a href="#contato">Contato</a><a href="#planos">Planos</a></div>
+        <div><h4>Legal</h4><a href="#">Privacidade</a><a href="#">Termos de Uso</a><a href="#">LGPD</a></div>
+      </div>
+      <div class="copyright">
+        AM2 Protege é uma plataforma tecnológica de apoio à gestão de riscos, relatos e processos organizacionais. A utilização do sistema não substitui avaliações técnicas ou responsabilidades profissionais previstas na legislação.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href');
+        if(id.length>1){
+          const el=document.querySelector(id);
+          if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
+        }
+      })
+    })
+  </script>
+</body>
+</html>
