@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>AM2 Protege · Pessoas protegidas. Riscos gerenciados.</title>
+  <!-- Font & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8fafc;
+      color: #0b1a2b;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* --- header / nav --- */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: #0b2b44;
+    }
+
+    .logo span {
+      color: #00877a;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      font-weight: 500;
+      color: #1e3a5f;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1e3a5f;
+      font-size: 0.95rem;
+      transition: 0.15s;
+    }
+
+    .nav-links a:hover {
+      color: #00877a;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #1e3a5f;
+      background: transparent;
+      padding: 10px 24px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1e3a5f;
+      transition: 0.15s;
+      cursor: default;
+    }
+
+    .btn-outline:hover {
+      background: #1e3a5f;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #0b2b44;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: white;
+      transition: 0.2s;
+      cursor: default;
+      box-shadow: 0 4px 10px rgba(11, 43, 68, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: #1a3f5e;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary.green {
+      background: #00877a;
+      box-shadow: 0 4px 12px rgba(0, 135, 122, 0.3);
+    }
+
+    .btn-primary.green:hover {
+      background: #006b60;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 40px 0 60px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: #0b1a2b;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content h1 .highlight {
+      color: #00877a;
+      border-bottom: 3px solid #ffc857;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      max-width: 90%;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .dashboard-mockup {
+      background: #0b1a2b;
+      border-radius: 24px;
+      padding: 24px 20px;
+      box-shadow: 0 30px 40px -20px rgba(0,0,0,0.5);
+      color: #eef2f6;
+    }
+
+    .dashboard-mockup .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px 14px;
+      flex: 1 0 100px;
+      backdrop-filter: blur(2px);
+    }
+
+    .stat-card .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #8ba0b9;
+    }
+
+    .stat-card .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-top: 4px;
+    }
+
+    .stat-card .trend {
+      font-size: 0.7rem;
+      color: #6fcf97;
+    }
+
+    .mini-chart {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 50px;
+    }
+
+    .bar {
+      width: 14%;
+      background: #1e4a6b;
+      border-radius: 6px 6px 0 0;
+      height: calc(30% + 10% * var(--h));
+    }
+
+    .bar.high { background: #e67e22; }
+    .bar.mid { background: #f1c40f; }
+    .bar.low { background: #2ecc71; }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      color: #0b1a2b;
+    }
+
+    .section-sub {
+      font-size: 1.1rem;
+      color: #2c3e50;
+      max-width: 700px;
+      margin-bottom: 2.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .card-soft {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+    }
+
+    .badge {
+      background: #e5f5f2;
+      color: #00877a;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .flow-icons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .flow-step {
+      background: #f1f6fa;
+      border-radius: 60px;
+      padding: 10px 18px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .risk-tag {
+      display: inline-block;
+      padding: 4px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .risk-high { background: #fce4e4; color: #b33c3c; }
+    .risk-moderate { background: #fff3e0; color: #b7651a; }
+    .risk-low { background: #e3f0e8; color: #1f7840; }
+
+    .timeline {
+      position: relative;
+      padding-left: 28px;
+      border-left: 3px solid #00877a;
+    }
+
+    .timeline-item {
+      margin-bottom: 28px;
+    }
+
+    .timeline-item .month {
+      font-weight: 700;
+      color: #00877a;
+    }
+
+    .pillar {
+      background: #f1f6fa;
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-weight: 500;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 2rem;
+    }
+
+    .plan-card {
+      background: white;
+      border-radius: 28px;
+      padding: 28px 22px;
+      border: 1px solid #eaf0f6;
+      transition: 0.2s;
+    }
+
+    .plan-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.08);
+    }
+
+    .plan-card .name {
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .plan-card .price {
+      font-size: 1.1rem;
+      color: #00877a;
+      margin: 16px 0;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      background: #0b1a2b;
+      color: #ccdbe9;
+      padding: 50px 0 30px;
+      margin-top: 60px;
+    }
+
+    .footer a {
+      color: #b0cada;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer .col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer .row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .footer-note {
+      border-top: 1px solid #1e3a5f;
+      margin-top: 30px;
+      padding-top: 28px;
+      font-size: 0.85rem;
+      color: #819ab3;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .footer .row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        gap: 16px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+      }
+      .hero-content h1 {
+        font-size: 2.4rem;
+      }
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .footer .row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .qr-mock {
+      background: #0b1a2b;
+      border-radius: 24px;
+      padding: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      color: white;
+    }
+
+    .qr-mock i {
+      font-size: 3.5rem;
+      color: white;
+    }
+
+    .security-badge {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .security-badge span {
+      background: #e5f5f2;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: #006b60;
+    }
+
+    .mock-dashboard-mini {
+      background: white;
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid #e2eaf1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Nav -->
+    <nav class="navbar">
+      <div class="logo">AM2 <span>Protege</span></div>
+      <div class="nav-links">
+        <a href="#">Plataforma</a>
+        <a href="#">Canal Seguro</a>
+        <a href="#">Planos</a>
+        <a href="#">Contato</a>
+        <span class="btn-outline">Entrar</span>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Riscos psicossociais, canal seguro e gestão de evidências em <span class="highlight">uma única plataforma</span>.</h1>
+        <p>Identifique riscos, receba relatos com confidencialidade, acompanhe planos de ação e construa evidências para apoiar a gestão de riscos ocupacionais da sua empresa.</p>
+        <div class="hero-buttons">
+          <span class="btn-primary">Solicitar demonstração</span>
+          <span class="btn-primary green">Conhecer a plataforma</span>
+        </div>
+        <div style="margin-top: 32px; display: flex; gap: 20px; flex-wrap: wrap;">
+          <span><i class="fas fa-check-circle" style="color:#00877a;"></i> Anonimato técnico</span>
+          <span><i class="fas fa-check-circle" style="color:#00877a;"></i> Evidências & rastreabilidade</span>
+          <span><i class="fas fa-check-circle" style="color:#00877a;"></i> NR-1 / GRO / PGR</span>
+        </div>
+      </div>
+      <div class="dashboard-mockup">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+          <span style="font-weight:600;">Dashboard</span>
+          <span style="color:#8ba0b9; font-size:0.8rem;"><i class="far fa-calendar-alt"></i> últimos 30 dias</span>
+        </div>
+        <div class="row">
+          <div class="stat-card"><span class="label">Índice psicossocial</span><div class="value">47</div><span class="trend">↓ 12%</span></div>
+          <div class="stat-card"><span class="label">Denúncias abertas</span><div class="value">14</div><span class="trend">↗ 3</span></div>
+          <div class="stat-card"><span class="label">Planos ação</span><div class="value">8</div><span class="trend">5 em andamento</span></div>
+          <div class="stat-card"><span class="label">Participação</span><div class="value">68%</div><span class="trend">+8%</span></div>
+        </div>
+        <div style="margin-top: 18px; display:flex; gap:20px; flex-wrap:wrap;">
+          <div><span style="color:#8ba0b9;">Setores com maior atenção</span><br><span style="font-weight:600;">Produção · Logística</span></div>
+          <div><span style="color:#8ba0b9;">Evolução de riscos</span>
+            <div class="mini-chart">
+              <div class="bar low" style="--h:2;"></div>
+              <div class="bar mid" style="--h:5;"></div>
+              <div class="bar high" style="--h:8;"></div>
+              <div class="bar high" style="--h:7;"></div>
+              <div class="bar mid" style="--h:4;"></div>
+              <div class="bar low" style="--h:2;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Por que existe -->
+    <section style="padding: 40px 0 20px;">
+      <h2 class="section-title">Por que o AM2 Protege existe</h2>
+      <p class="section-sub">As empresas precisam ir além de receber denúncias. É necessário identificar riscos, registrar ações, acompanhar resultados e construir evidências de que os problemas estão sendo tratados.</p>
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+        <span class="pillar"><i class="fas fa-shield-alt" style="color:#00877a;"></i> Canal seguro</span>
+        <span class="pillar"><i class="fas fa-chart-line" style="color:#00877a;"></i> Riscos psicossociais</span>
+        <span class="pillar"><i class="fas fa-clipboard-list" style="color:#00877a;"></i> Planos de ação</span>
+        <span class="pillar"><i class="fas fa-database" style="color:#00877a;"></i> Evidências</span>
+      </div>
+    </section>
+
+    <!-- Canal seguro + fluxo -->
+    <section style="padding: 40px 0;">
+      <div class="grid-2">
+        <div>
+          <span class="badge">Canal seguro</span>
+          <h2 class="section-title" style="font-size:1.8rem;">Colaborador acessa por QR Code</h2>
+          <div class="flow-icons">
+            <span class="flow-step"><i class="fas fa-flag"></i> Denúncia</span>
+            <span class="flow-step"><i class="fas fa-comment"></i> Relatar</span>
+            <span class="flow-step"><i class="fas fa-clipboard-check"></i> Avaliar ambiente</span>
+          </div>
+          <p style="margin: 16px 0;"><i class="fas fa-user-secret" style="color:#00877a;"></i> Anônima ou identificada · protocolo seguro · código confidencial</p>
+          <p><i class="fas fa-paperclip"></i> Anexos, fotos, documentos, mensagens, acompanhamento e comunicação bidirecional.</p>
+          <div style="margin-top: 20px; background:#e5f5f2; border-radius:40px; padding:12px 20px; display:inline-block; font-weight:600; color:#006b60;">Anonimato técnico e confidencialidade desde a concepção</div>
+        </div>
+        <div class="qr-mock" style="justify-content:center; flex-direction:column; align-items:center; padding:40px 20px;">
+          <i class="fas fa-qrcode" style="font-size:5rem;"></i>
+          <span style="font-weight:600; margin-top:12px;">Escaneie e acesse</span>
+          <span style="color:#b0cada;">Faça uma denúncia · Relate · Avalie</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Riscos psicossociais + mapa -->
+    <section style="padding: 40px 0;">
+      <div class="grid-2">
+        <div>
+          <span class="badge">Riscos psicossociais</span>
+          <h2 class="section-title" style="font-size:1.8rem;">Transforme percepções em indicadores</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:10px; margin: 16px 0;">
+            <span class="risk-tag risk-high">Produção · Alto</span>
+            <span class="risk-tag risk-moderate">Logística · Moderado</span>
+            <span class="risk-tag risk-low">Administrativo · Baixo</span>
+            <span class="risk-tag risk-moderate">Comercial · Moderado</span>
+          </div>
+          <p><i class="fas fa-list-ul"></i> Sobrecarga, pressão, conflitos, assédio, violência, falta de autonomia, comunicação, liderança, reconhecimento e organização.</p>
+        </div>
+        <div class="card-soft">
+          <h4 style="margin-bottom:12px;">Mapa de riscos por setor</h4>
+          <div><span class="risk-tag risk-high">Produção</span> Sobrecarga: Alto · Pressão: Alto · Liderança: Moderado</div>
+          <div style="margin-top:10px;"><span class="risk-tag risk-moderate">Logística</span> Comunicação: Moderado · Conflitos: Moderado</div>
+          <div style="margin-top:10px;"><span class="risk-tag risk-low">Administrativo</span> Riscos gerais: Baixo</div>
+          <p style="margin-top:20px; font-size:0.95rem; color:#2c3e50;">Visualize tendências por unidade, setor ou período sem expor respostas individuais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Plano de ação + linha do tempo -->
+    <section style="padding: 40px 0;">
+      <div class="grid-2">
+        <div>
+          <span class="badge">Plano de ação</span>
+          <h2 class="section-title" style="font-size:1.8rem;">Não basta identificar o risco. É preciso demonstrar o que foi feito.</h2>
+          <div style="background:white; border-radius:20px; padding:20px; border:1px solid #edf2f7; margin-top:16px;">
+            <p><strong>Risco:</strong> Sobrecarga de trabalho</p>
+            <p><strong>Ação:</strong> Revisar escala e dimensionamento da equipe.</p>
+            <p><strong>Responsável:</strong> Gestor da unidade · Prazo: 30 dias</p>
+            <p><strong>Evidências:</strong> Nova escala, ata de reunião e treinamento.</p>
+            <p><strong>Resultado:</strong> Indicador reduzido de 82 para 47.</p>
+          </div>
+        </div>
+        <div>
+          <span class="badge">Linha do tempo do risco</span>
+          <div class="timeline">
+            <div class="timeline-item"><span class="month">Janeiro</span> — Pesquisa identificou risco alto.</div>
+            <div class="timeline-item"><span class="month">Fevereiro</span> — Relatos relacionados aumentaram.</div>
+            <div class="timeline-item"><span class="month">Março</span> — Plano de ação criado.</div>
+            <div class="timeline-item"><span class="month">Abril</span> — Medida preventiva implementada.</div>
+            <div class="timeline-item"><span class="month">Junho</span> — Nova avaliação: risco reduzido.</div>
+          </div>
+          <p style="font-weight:600; margin-top:12px;">Da identificação à evidência de eficácia.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investigação -->
+    <section style="padding: 30px 0;">
+      <span class="badge">Investigação de denúncias</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Gestão de casos com trilha de auditoria</h2>
+      <div class="card-soft" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div><span class="risk-tag" style="background:#f1f6fa;">Protocolo #234</span> Categoria: Assédio · Prioridade: Alta</div>
+        <div><span class="risk-tag" style="background:#f1f6fa;">Status:</span> Em investigação · Responsável: RH</div>
+        <div style="grid-column:1/-1;">Timeline, mensagens, anexos, ações realizadas, encerramento.</div>
+        <div style="grid-column:1/-1; font-size:0.9rem; color:#1e3a5f;"><i class="fas fa-history"></i> Trilha de auditoria completa</div>
+      </div>
+    </section>
+
+    <!-- Privacidade e LGPD -->
+    <section style="padding: 40px 0;">
+      <span class="badge">Privacidade e LGPD</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Segurança e conformidade desde a base</h2>
+      <div class="security-badge">
+        <span><i class="fas fa-lock"></i> Controle de acesso</span>
+        <span><i class="fas fa-key"></i> MFA</span>
+        <span><i class="fas fa-eye-slash"></i> Anonimização</span>
+        <span><i class="fas fa-database"></i> Backups</span>
+        <span><i class="fas fa-user-shield"></i> Privacy by Design</span>
+        <span><i class="fas fa-balance-scale"></i> LGPD</span>
+      </div>
+      <div style="margin-top:16px; background:white; border-radius:24px; padding:24px; border:1px solid #edf2f7;">
+        <p><i class="fas fa-circle-check" style="color:#00877a;"></i> Criptografia, logs, segregação entre empresas, retenção, e remoção automática de metadados (em breve).</p>
+        <p><i class="fas fa-shield"></i> Projetado para evitar coleta desnecessária de elementos que possam identificar o denunciante.</p>
+      </div>
+    </section>
+
+    <!-- Multiempresa, relatórios, IA, beneficios, como funciona, planos, CTA final -->
+    <section style="padding: 20px 0;">
+      <div class="grid-2" style="margin-bottom:40px;">
+        <div><span class="badge">Multiempresa</span><h2 style="font-size:1.6rem;">Gerencie empresas, unidades e setores</h2><p>Estrutura: Empresa → unidades → setores → usuários → indicadores. SaaS completo.</p></div>
+        <div><span class="badge">Relatórios & evidências</span><h2 style="font-size:1.6rem;">Dossiê de gestão</h2><p>Metodologia, participação, riscos, ações, evidências, indicadores, evolução e histórico.</p></div>
+      </div>
+      <div style="background:#eef6f4; border-radius:32px; padding:24px; margin:30px 0;">
+        <span class="badge">IA</span>
+        <h3 style="font-size:1.4rem;">Inteligência para apoiar decisões, não para substituir pessoas.</h3>
+        <p>Classificação inicial, resumo, alertas, identificação de possíveis elementos que revelem identidade. A decisão permanece com pessoas autorizadas.</p>
+      </div>
+      <div class="grid-3" style="margin:30px 0;">
+        <div class="card-soft"><i class="fas fa-user-shield" style="font-size:2rem;color:#00877a;"></i><h4>Mais segurança</h4></div>
+        <div class="card-soft"><i class="fas fa-eye" style="font-size:2rem;color:#00877a;"></i><h4>Mais visibilidade</h4></div>
+        <div class="card-soft"><i class="fas fa-link" style="font-size:2rem;color:#00877a;"></i><h4>Mais rastreabilidade</h4></div>
+        <div class="card-soft"><i class="fas fa-file-alt" style="font-size:2rem;color:#00877a;"></i><h4>Mais evidências</h4></div>
+        <div class="card-soft"><i class="fas fa-tasks" style="font-size:2rem;color:#00877a;"></i><h4>Mais controle</h4></div>
+        <div class="card-soft"><i class="fas fa-chart-pie" style="font-size:2rem;color:#00877a;"></i><h4>Mais informação</h4></div>
+      </div>
+      <div style="display:flex; gap:2rem; flex-wrap:wrap; justify-content:space-between; background:white; border-radius:32px; padding:30px; border:1px solid #eaf0f6;">
+        <div><span class="badge">Como funciona</span><h3>1. Configure · 2. Divulgue QR Code · 3. Receba relatos · 4. Gerencie riscos</h3></div>
+        <div><span class="badge">Planos</span><div><strong>Essencial</strong> Canal Seguro · <strong>Profissional</strong> + Riscos · <strong>Enterprise</strong> todos + API/SSO</div></div>
+      </div>
+    </section>
+
+    <!-- CTA final -->
+    <section style="padding: 40px 0; text-align:center; background: #0b1a2b; border-radius:48px; color:white; margin:40px 0;">
+      <h2 style="font-size:2.6rem; font-weight:700;">Transforme informação em prevenção.</h2>
+      <p style="max-width:600px; margin:16px auto; color:#ccdbe9;">Crie um ambiente seguro para seus colaboradores e dê à sua equipe as ferramentas necessárias para identificar, acompanhar e tratar riscos relacionados ao trabalho.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:24px;">
+        <span class="btn-primary" style="background:white; color:#0b1a2b;">Solicitar demonstração</span>
+        <span class="btn-primary green">Falar com um especialista</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col"><span style="font-weight:700; font-size:1.4rem; color:white;">AM2 Protege</span><span style="font-size:0.9rem;">Pessoas protegidas. Riscos gerenciados. Evidências organizadas.</span></div>
+        <div class="col"><span style="color:white; font-weight:600;">Produto</span><a href="#">Canal Seguro</a><a href="#">Riscos Psicossociais</a><a href="#">Planos de Ação</a><a href="#">Relatórios</a></div>
+        <div class="col"><span style="color:white; font-weight:600;">Empresa</span><a href="#">Sobre</a><a href="#">Contato</a></div>
+        <div class="col"><span style="color:white; font-weight:600;">Legal</span><a href="#">Privacidade</a><a href="#">Termos de Uso</a><a href="#">LGPD</a></div>
+      </div>
+      <div class="footer-note">AM2 Protege é uma plataforma tecnológica de apoio à gestão de riscos, relatos e processos organizacionais. A utilização do sistema não substitui avaliações técnicas ou responsabilidades profissionais previstas na legislação.</div>
+    </div>
+  </footer>
+</body>
+</html>
