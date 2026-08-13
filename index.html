@@ -217,6 +217,23 @@
       .chart{grid-template-columns:1fr}
       .cta{padding:34px 22px}
     }
+  
+    nav .btn-primary{color:#fff !important;background:#155e75 !important}
+    nav .btn-primary:hover{color:#fff !important;background:#0f4c5f !important}
+    .demo-modal{position:fixed;inset:0;background:rgba(4,25,37,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}
+    .demo-modal.active{display:flex}
+    .demo-box{position:relative;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;background:#fff;border-radius:22px;padding:32px;box-shadow:0 30px 90px rgba(0,0,0,.30)}
+    .demo-close{position:absolute;right:18px;top:16px;width:38px;height:38px;border:0;border-radius:50%;background:#eef4f6;color:#274b5d;font-size:21px;cursor:pointer}
+    .demo-box h2{margin:0 45px 8px 0;font-size:28px;color:#15384b}
+    .demo-subtitle{color:#677e8b;margin:0 0 24px;font-size:14px}
+    .demo-form-group{margin-bottom:15px}
+    .demo-form-group label{display:block;margin-bottom:6px;font-size:13px;font-weight:700;color:#294858}
+    .demo-form-group input{width:100%;padding:13px 14px;border:1px solid #cad8df;border-radius:10px;font-size:15px;outline:none;background:#fff;color:#18384a}
+    .demo-form-group input:focus{border-color:#176b89;box-shadow:0 0 0 3px rgba(23,107,137,.10)}
+    .demo-privacy{background:#f3f8fa;border-radius:10px;padding:12px;color:#627985;font-size:11px;line-height:1.5;margin:17px 0}
+    .demo-submit{width:100%;border:0;border-radius:11px;padding:14px 18px;background:#19a15e;color:#fff;cursor:pointer;font-size:15px;font-weight:700}
+    .demo-submit:hover{background:#15894f}
+    @media(max-width:600px){.demo-box{padding:26px 20px 22px}.demo-box h2{font-size:24px}}
   </style>
 </head>
 <body>
@@ -228,11 +245,10 @@
         <a href="#riscos">Riscos Psicossociais</a>
         <a href="#canal">Canal Seguro</a>
         <a href="#seguranca">Segurança</a>
-        <a href="#planos">Planos</a>
       </div>
       <div class="nav-actions">
         <a class="btn btn-secondary" href="#planos">Ver planos</a>
-        <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+        <a class="btn btn-primary" href="#" onclick="openDemoForm(event)">Solicitar demonstração</a>
       </div>
     </div>
   </nav>
@@ -244,7 +260,7 @@
         <h1>Proteja pessoas. <span>Gerencie riscos.</span> Organize evidências.</h1>
         <p>Uma plataforma SaaS para canal seguro, riscos psicossociais, planos de ação e rastreabilidade — apoiando empresas na gestão preventiva do ambiente de trabalho.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#contato">Solicitar demonstração</a>
+          <a class="btn btn-primary" href="#" onclick="openDemoForm(event)">Solicitar demonstração</a>
           <a class="btn btn-secondary" href="#produto">Conhecer a plataforma</a>
         </div>
         <div class="trust-row">
@@ -448,61 +464,13 @@
     </div>
   </section>
 
-  <section class="section" id="planos">
-    <div class="container">
-      <div class="section-head">
-        <span class="pill">Planos</span>
-        <h2>Comece pelo canal. Evolua para uma gestão completa.</h2>
-        <p>Estrutura comercial ilustrativa para o MVP. Valores podem ser definidos depois da validação com os primeiros clientes.</p>
-      </div>
-      <div class="plans">
-        <div class="card plan">
-          <h3>Essencial</h3>
-          <p>Para empresas que precisam começar com um canal seguro.</p>
-          <ul>
-            <li>Canal anônimo e identificado</li>
-            <li>Protocolo e acompanhamento</li>
-            <li>Anexos e mensagens</li>
-            <li>Gestão de casos</li>
-            <li>QR Code</li>
-          </ul>
-          <a class="btn btn-secondary" href="#contato">Solicitar proposta</a>
-        </div>
-        <div class="card plan featured">
-          <span class="plan-tag">Mais completo</span>
-          <h3>Profissional</h3>
-          <p>Canal Seguro + Gestão de riscos psicossociais.</p>
-          <ul>
-            <li>Tudo do Essencial</li>
-            <li>Avaliações psicossociais</li>
-            <li>Mapa de riscos</li>
-            <li>Planos de ação</li>
-            <li>Dossiês e evidências</li>
-          </ul>
-          <a class="btn btn-primary" href="#contato">Solicitar proposta</a>
-        </div>
-        <div class="card plan">
-          <h3>Enterprise</h3>
-          <p>Para operações maiores e ambientes complexos.</p>
-          <ul>
-            <li>Tudo do Profissional</li>
-            <li>Múltiplas unidades</li>
-            <li>SSO e API</li>
-            <li>Perfis avançados</li>
-            <li>Integrações e SLA</li>
-          </ul>
-          <a class="btn btn-secondary" href="#contato">Falar com especialista</a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="section" id="contato">
     <div class="container cta">
       <h2>Transforme informação em prevenção.</h2>
       <p>Crie um ambiente seguro para seus colaboradores e dê às equipes de RH, SST e Compliance ferramentas para identificar, acompanhar e tratar riscos relacionados ao trabalho.</p>
       <div class="hero-cta" style="justify-content:center">
-        <a class="btn btn-secondary" style="background:white" href="mailto:contato@am2protege.com.br">Solicitar demonstração</a>
+        <a class="btn btn-secondary" style="background:white" href="#" onclick="openDemoForm(event)">Solicitar demonstração</a>
         <a class="btn btn-ghost" style="color:white;border-color:rgba(255,255,255,.3)" href="#inicio">Voltar ao início</a>
       </div>
     </div>
@@ -516,7 +484,7 @@
           <p style="font-size:13px;max-width:420px">Pessoas protegidas. Riscos gerenciados. Evidências organizadas.</p>
         </div>
         <div><h4>Produto</h4><a href="#canal">Canal Seguro</a><a href="#riscos">Riscos Psicossociais</a><a href="#produto">Planos de Ação</a></div>
-        <div><h4>Empresa</h4><a href="#contato">Contato</a><a href="#planos">Planos</a></div>
+        <div><h4>Empresa</h4><a href="#contato">Contato</a></div>
         <div><h4>Legal</h4><a href="#">Privacidade</a><a href="#">Termos de Uso</a><a href="#">LGPD</a></div>
       </div>
       <div class="copyright">
@@ -536,5 +504,39 @@
       })
     })
   </script>
+
+  <div class="demo-modal" id="demoModal" onclick="closeDemoOutside(event)">
+    <div class="demo-box">
+      <button type="button" class="demo-close" onclick="closeDemoForm()" aria-label="Fechar">×</button>
+      <h2>Solicite uma demonstração</h2>
+      <p class="demo-subtitle">Conte um pouco sobre sua empresa. Ao continuar, os dados serão enviados diretamente para nossa equipe pelo WhatsApp.</p>
+      <form id="demoForm" onsubmit="sendDemoWhatsApp(event)">
+        <div class="demo-form-group"><label for="demoNome">Nome *</label><input type="text" id="demoNome" autocomplete="name" placeholder="Seu nome" required></div>
+        <div class="demo-form-group"><label for="demoEmpresa">Empresa *</label><input type="text" id="demoEmpresa" autocomplete="organization" placeholder="Nome da empresa" required></div>
+        <div class="demo-form-group"><label for="demoTelefone">Telefone / WhatsApp *</label><input type="tel" id="demoTelefone" autocomplete="tel" placeholder="(45) 99999-9999" required></div>
+        <div class="demo-form-group"><label for="demoEmail">E-mail *</label><input type="email" id="demoEmail" autocomplete="email" placeholder="seuemail@empresa.com.br" required></div>
+        <div class="demo-privacy">Ao continuar, você solicita contato comercial sobre o AM2 Protege. As informações acima serão encaminhadas pelo WhatsApp para atendimento da solicitação.</div>
+        <button type="submit" class="demo-submit">💬 Enviar pelo WhatsApp</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openDemoForm(event){if(event)event.preventDefault();document.getElementById('demoModal').classList.add('active');document.body.style.overflow='hidden';setTimeout(()=>document.getElementById('demoNome').focus(),150)}
+    function closeDemoForm(){document.getElementById('demoModal').classList.remove('active');document.body.style.overflow=''}
+    function closeDemoOutside(event){if(event.target.id==='demoModal')closeDemoForm()}
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDemoForm()});
+    function sendDemoWhatsApp(event){
+      event.preventDefault();
+      const nome=document.getElementById('demoNome').value.trim();
+      const empresa=document.getElementById('demoEmpresa').value.trim();
+      const telefone=document.getElementById('demoTelefone').value.trim();
+      const email=document.getElementById('demoEmail').value.trim();
+      if(!nome||!empresa||!telefone||!email){alert('Preencha todos os campos antes de continuar.');return}
+      const mensagem=`Olá! Gostaria de solicitar uma demonstração do AM2 Protege.\n\n*DADOS DO INTERESSADO*\n\nNome: ${nome}\nEmpresa: ${empresa}\nTelefone: ${telefone}\nE-mail: ${email}\n\nTenho interesse em conhecer a plataforma AM2 Protege para gestão de riscos psicossociais, Canal Seguro e apoio aos processos relacionados à NR-1.`;
+      window.open('https://wa.me/5545998607211?text='+encodeURIComponent(mensagem),'_blank','noopener,noreferrer');
+    }
+  </script>
+
 </body>
 </html>
